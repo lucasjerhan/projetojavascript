@@ -98,4 +98,3 @@ function loginAdmin() {
 
     console.log('Login Admin:', obj);
 }
-
