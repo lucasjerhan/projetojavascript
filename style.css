@@ -40,7 +40,7 @@ form {
 label {
     display: block;
     margin-bottom: 8px;
-    color: #000; /* Set label text color */
+    color: #000; 
 }
 
 input,
@@ -49,7 +49,7 @@ textarea {
     padding: 8px;
     margin-bottom: 16px;
     box-sizing: border-box;
-    display: block; /* Ensure elements are stacked vertically */
+    display: block; 
 }
 
 button {
