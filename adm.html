@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="script.js"></script>
     <title>Site Trabalho UNIESP</title>
 </head>
 <body>
@@ -24,38 +26,18 @@
     <p></p>
 </section>
 
-<section id="contato">
-    <h2></h2>
-    <form id="contact-form">
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login" required>
-
-        <label for="senha">Senha:</label>
-        <input type="text" id="senha" name="senha" required>
-
-        <button type="button" onclick="loginAdmin()">Entrar</button>
-    </form>
-</section>
-
-<section id="area-admin" style="display: none;">
-    <h2>Área Administrativa</h2>
+<section id="area-admin">
+    <h2>Login de Administrador</h2>
     <form id="admin-login-form">
         <label for="loginAdmin">Login:</label>
         <input type="text" id="loginadmin" name="loginadmin" required>
 
         <label for="senhaadmin">Senha:</label>
         <input type="password" id="senhaadmin" name="senhaadmin" required>
+
         <button type="button" onclick="loginAdmin()">Entrar</button>
-        <button type="button" onclick="redirecionarParaEntrar()">Entrar</button>
-
     </form>
-
-    <div id="admin-content" style="display: none;">
-        <!-- Conteúdo administrativo aparecerá aqui -->
-    </div>
 </section>
-
-<script src="script.js"></script>
 
 </body>
 </html>

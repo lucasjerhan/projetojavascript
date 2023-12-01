@@ -1,112 +1,101 @@
-function enviarMensagem() {
-    var nome = document.getElementById("nome").value;
-    var email = document.getElementById("email").value;
-    var mensagem = document.getElementById("mensagem").value;
-
-    // Simulação de envio de mensagem (pode ser substituído por uma chamada de API real)
-    console.log('Mensagem Enviada:', { nome, email, mensagem });
-}
-
-function loginAdmin() {
-    var login = document.getElementById("login").value;
-    var senha = document.getElementById("senha").value;
-
-    // Simulação de autenticação do administrador (pode ser substituído por uma chamada de API real)
-    if (login === 'admin' && senha === 'admin') {
-        document.getElementById('area-admin').style.display = 'none';
-        document.getElementById('admin-content').style.display = 'block';
-    } else {
-        alert('Login ou senha incorretos.');
-    }
-    console.log('Mensagem Enviada:', { login, senha });
-}
-function redirecionarParaEntrar() {
-    // Obtém os valores de login e senha (se necessário)
-    var login = document.getElementById("nome").value;
-    var senha = document.getElementById("email").value;
-
-    // Aqui você pode adicionar lógica adicional, como verificar as credenciais, se necessário
-
-    // Redireciona para a página entrar.html
-    window.location.assign("entrar.html");
-}
 function obterMensagens() {
-
-    var retorno = [];
-
-    var consulta = $.ajax({
+    $.ajax({
         url: 'https://app-uniesp-p2-43622fe4ead4.herokuapp.com/mensagens',
         method: 'GET',
         dataType: 'json',
-        async: false
-    }).fail(function(){
-        return retorno;
+    })
+    .done(function(data) {
+        preencherPaginaContatos(data);
+    })
+    .fail(function() {
+        console.error('Erro ao obter mensagens');
     });
-
-    consulta.done(function(data) {
-        retorno = data;
-    });
-
-    return retorno;
 }
 
-function inserirMensagem(obj) {
+function preencherPaginaContatos(mensagens) {
+    var container = $('#contato .message-container');
 
-    /*
+    // Limpa o conteúdo existente
+    container.empty();
 
-    var obj = {
-            nome: "nome da pessoa", 
-            email: "email informado", 
-            mensagem: "a mensagem informada"} 
+    // Preenche com as mensagens obtidas
+    mensagens.forEach(function(mensagem, index) {
+        var messageHtml = `
+            <div class="message-container">
+                <h3>Mensagem ${index + 1}</h3>
+                <p><strong>Nome:</strong> ${mensagem.nome}</p>
+                <p><strong>Email:</strong> ${mensagem.email}</p>
+                <p><strong>Mensagem:</strong> ${mensagem.mensagem}</p>
+            </div>
+        `;
+        container.append(messageHtml);
+    });
+}
 
-    */
+function enviarMensagem() {
+    var nome = $('#nome').val();
+    var email = $('#email').val();
+    var mensagem = $('#mensagem').val();
 
-    var inserir = $.ajax({
+    var mensagemObj = { nome, email, mensagem };
 
+    $.ajax({
         url: 'https://app-uniesp-p2-43622fe4ead4.herokuapp.com/mensagens',
         method: 'POST',
-        data: JSON.stringify(obj),
+        data: JSON.stringify(mensagemObj),
         dataType: 'json',
-        async: false,
         contentType: 'application/json',
+    })
+    .done(function() {
+        // Limpa os campos após enviar a mensagem
+        $('#nome, #email, #mensagem').val('');
+
+        // Atualiza a lista de mensagens
+        obterMensagens();
+    })
+    .fail(function() {
+        console.error('Erro ao enviar mensagem');
     });
 }
 
-function validarUsuario(objLoginSenha) {
+function loginUsuario() {
+    var login = $('#login').val();
+    var senha = $('#senha').val();
 
-    //email: admin@admin.com
-    //senha: '1234'
+    var usuarioObj = { login, senha };
 
-    /*
-
-    var objLoginSenha = {
-            email: "email informado", 
-            senha: "senha informada"} 
-
-    */
-
-    var retorno = false;
-
-    console.log(objLoginSenha);
-
-    var validacao = $.ajax({
-        url: 'https://app-uniesp-p2-43622fe4ead4.herokuapp.com/usuarios/validar',
+    $.ajax({
+        url: 'https://app-uniesp-p2-43622fe4ead4.herokuapp.com/usuarios/validar', // Substitua pela URL correta
         method: 'POST',
         dataType: 'json',
-        async: false,
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-                },
         contentType: 'application/json',
-        data: JSON.stringify(objLoginSenha)
-    }).fail(function(){
-        return retorno;
+        data: JSON.stringify(usuarioObj),
+    })
+    .done(function() {
+        // Redireciona para a página de contatos
+        window.location.href = 'contato.html';
+    })
+    .fail(function() {
+        console.error('Login ou senha incorretos.');
+        alert('Login ou senha incorretos.');
     });
+}
 
-    validacao.done(function(data) {
-        retorno = data;
-    });
 
-    return retorno;
+function loginAdmin() {
+    var login = document.getElementById("loginadmin").value;
+    var senha = document.getElementById("senhaadmin").value;
+
+    var obj = { login, senha };
+
+    // Simulação de autenticação do administrador (pode ser substituído por uma chamada de API real)
+    if (login === 'admin' && senha === 'admin') {
+        // Redireciona para a página de mensagens após o login bem-sucedido
+        window.location.assign("mensagens.html");
+    } else {
+        alert('Login ou senha incorretos.');
+    }
+
+    console.log('Login Admin:', obj);
 }
 

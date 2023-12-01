@@ -22,31 +22,22 @@
 </header>
 
 <section id="home">
-    <h2>Área Administrativa</h2>
+    <h2>Contato</h2>
     <p></p>
 </section>
 
 <section id="contato">
-    <h2>Entre em Contato</h2>
-    <form id="contact-form">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+    <h2>Login de Usuário</h2>
+    <form id="user-login-form">
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
 
-        <label for="mensagem">Mensagem:</label>
-        <textarea id="mensagem" name="mensagem" required></textarea>
-
-        <button type="button" onclick="enviarMensagem()">Enviar</button>
+        <button type="button" onclick="loginUsuario()">Entrar</button>
     </form>
-
-    </div>
 </section>
-
-<script>
-    obterMensagens();
-</script>
 
 </body>
 </html>
