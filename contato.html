@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Site Trabalho UNIESP</title>
+</head>
+<body>
+
+<header>
+    <h1>TRABALHO UNIESP</h1>
+    <nav>
+        <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="contato.html">CONTATO</a></li>
+            <li><a href="adm.html">ÁREA ADMIN</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="home">
+    <h2>Contato</h2>
+    <p></p>
+</section>
+
+<section id="contato">
+    <h2>Entre em Contato</h2>
+    <form id="contact-form">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" required></textarea>
+
+        <button type="button" onclick="enviarMensagem()">Enviar</button>
+    </form>
+</section>
+
+<section id="area-admin" style="display: none;">
+    <h2>Área Administrativa</h2>
+    <form id="admin-login-form">
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login" required>
+
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+
+        <button type="submit" onclick="loginAdmin()">Entrar</button>
+    </form>
+
+    <div id="admin-content" style="display: none;">
+        <!-- Conteúdo administrativo aparecerá aqui -->
+    </div>
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
